@@ -34,7 +34,7 @@ $(document).ready(function() {
 //             const estado = resposta.uf;
 //             const endereco = `${logradouro}, ${bairro} - ${cidade} - ${estado}`;
 //             $('#endereco').val(endereco);
-            
+
 // // Forçando um delay para que a animação do ícone seja visível:
 //             setTimeout(function() {
 //                 $(botao).find('i').removeClass('d-none');
@@ -70,5 +70,20 @@ $(document).ready(function() {
                 $(botao).find('span').addClass('d-none');
             }, 1000);
         })
+    })
+
+    // Tratar a exceção: input de nome em branco
+        // estamos lidando com o evento de submit
+        // ele recebe o callback "evento", para que possamos aplicar
+        // também o preventDefault (para que a pag não recarregue ao submit)
+    $('#formulario-pedido').submit(function(evento) {
+        evento.preventDefault();
+
+        // agora, pegamos os valores do input de id "nome" e definimos que,
+        // caso o comprimento seja 0, ou seja, vazio, "lançar" o new Error
+        // com a mensagem "digite o nome"
+        if ($('#nome').val().length == 0) {
+            throw new Error('Digite o nome');
+        }
     })
 })
